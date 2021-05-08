@@ -12,6 +12,9 @@ import { config as dotenvConfig } from "dotenv";
 import { HardhatUserConfig } from "hardhat/config";
 import { NetworkUserConfig } from "hardhat/types";
 
+import '@openzeppelin/hardhat-upgrades';
+import "@nomiclabs/hardhat-etherscan";
+
 dotenvConfig({ path: resolve(__dirname, "./.env") });
 
 const chainIds = {
@@ -22,6 +25,8 @@ const chainIds = {
   mainnet: 1,
   rinkeby: 4,
   ropsten: 3,
+  heco: 128,
+  heco_testnet: 256,
 };
 
 // Ensure that we have all the environment variables we need.
@@ -32,6 +37,14 @@ if (!process.env.MNEMONIC) {
   mnemonic = process.env.MNEMONIC;
 }
 
+// Ensure that we have all the environment variables we need.
+let privateKey: string;
+if (!process.env.PRIVATE_KEY) {
+  throw new Error("Please set your PRIVATE_KEY in a .env file");
+} else {
+  privateKey = process.env.PRIVATE_KEY;
+}
+
 let infuraApiKey: string;
 if (!process.env.INFURA_API_KEY) {
   throw new Error("Please set your INFURA_API_KEY in a .env file");
@@ -39,11 +52,11 @@ if (!process.env.INFURA_API_KEY) {
   infuraApiKey = process.env.INFURA_API_KEY;
 }
 
-let privateKey: string;
-if (!process.env.PRIVATE_KEY) {
-  throw new Error("Please set your PRIVATE_KEY in a .env file");
+let etherscanApiKey: string;
+if (!process.env.ETHERSCAN_API_KEY) {
+  throw new Error("Please set your ETHERSCAN_API_KEY in a .env file");
 } else {
-  privateKey = process.env.PRIVATE_KEY;
+  etherscanApiKey = process.env.ETHERSCAN_API_KEY;
 }
 
 function createTestnetConfig(network: keyof typeof chainIds): NetworkUserConfig {
@@ -71,16 +84,17 @@ const config: HardhatUserConfig = {
   },
   networks: {
     hardhat: {
-      // accounts: {
-      //   mnemonic,
-      // },
-      accounts: [`0x${privateKey}`],
+      accounts: {
+        mnemonic,
+      },
       chainId: chainIds.hardhat,
     },
     goerli: createTestnetConfig("goerli"),
     kovan: createTestnetConfig("kovan"),
     rinkeby: createTestnetConfig("rinkeby"),
     ropsten: createTestnetConfig("ropsten"),
+    heco: { accounts: [`0x${process.env.HT_PRIVATE_KEY}`], chainId: chainIds["heco"],url:"https://http-mainnet.hecochain.com",},
+    heco_testnet: { accounts: [`0x${process.env.HT_PRIVATE_KEY}`], chainId: chainIds["heco_testnet"],url:"https://http-testnet.hecochain.com",},
   },
   paths: {
     artifacts: "./artifacts",
@@ -107,6 +121,10 @@ const config: HardhatUserConfig = {
   typechain: {
     outDir: "typechain",
     target: "ethers-v5",
+  },
+  etherscan: {
+    // apiKey: etherscanApiKey,
+    apiKey: process.env.HECOINFO_API_KEY,
   },
 };
 

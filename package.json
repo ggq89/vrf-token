@@ -1,5 +1,5 @@
 {
-    "name": "verify instance",
+    "name": "vrf-token",
     "description": "heco info verify instance",
     "version": "1.0.0",
     "author": {
@@ -13,6 +13,7 @@
         "@ethersproject/bignumber": "^5.1.1",
         "@nomiclabs/hardhat-ethers": "^2.0.2",
         "@nomiclabs/hardhat-waffle": "^2.0.1",
+        "@openzeppelin/contracts-upgradeable": "^4.1.0",
         "@typechain/ethers-v5": "^5.0.0",
         "@typechain/hardhat": "^1.0.1",
         "@types/chai": "^4.2.13",
