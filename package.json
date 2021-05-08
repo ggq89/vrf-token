@@ -5,15 +5,17 @@
     "author": {
         "name": "albert"
     },
-    "dependencies": {},
     "devDependencies": {
         "@commitlint/cli": "^9.1.2",
         "@commitlint/config-conventional": "^9.1.2",
         "@ethersproject/abstract-signer": "^5.1.0",
         "@ethersproject/bignumber": "^5.1.1",
         "@nomiclabs/hardhat-ethers": "^2.0.2",
+        "@nomiclabs/hardhat-etherscan": "^2.1.2",
         "@nomiclabs/hardhat-waffle": "^2.0.1",
+        "@openzeppelin/contracts": "^4.1.0",
         "@openzeppelin/contracts-upgradeable": "^4.1.0",
+        "@openzeppelin/hardhat-upgrades": "^1.7.0",
         "@typechain/ethers-v5": "^5.0.0",
         "@typechain/hardhat": "^1.0.1",
         "@types/chai": "^4.2.13",
@@ -29,7 +31,7 @@
         "eslint": "^7.24.0",
         "eslint-config-prettier": "^8.2.0",
         "ethereum-waffle": "^3.3.0",
-        "ethers": "^5.1.3",
+        "ethers": "^5.1.4",
         "fs-extra": "^9.0.1",
         "hardhat": "^2.2.0",
         "hardhat-gas-reporter": "^1.0.4",
