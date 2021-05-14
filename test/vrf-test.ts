@@ -6,7 +6,7 @@ import { Contract, ContractFactory } from "ethers";
 describe("VrfToken", function() {
   it('Deployment should assign the total supply of tokens to the owner', async () => {
     const VrfToken: ContractFactory = await ethers.getContractFactory("VrfToken");
-    const vrfToken: Contract = await upgrades.deployProxy(VrfToken);
+    const vrfToken: Contract = await upgrades.deployProxy(VrfToken, { kind: 'uups' });
     // const vrfToken = await VrfToken.deploy();
     await vrfToken.deployed();
 

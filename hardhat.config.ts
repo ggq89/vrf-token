@@ -70,7 +70,8 @@ function createTestnetConfig(network: keyof typeof chainIds): NetworkUserConfig 
     // },
     accounts: [`0x${privateKey}`],
     chainId: chainIds[network],
-    url,
+    url:url,
+    // url:"http://47.97.20.124:8545",
   };
 }
 

@@ -13,7 +13,7 @@ async function main(): Promise<void> {
 
   // We get the contract to deploy
   const VrfToken: ContractFactory = await ethers.getContractFactory("VrfToken");
-  const vrfToken: Contract = await upgrades.deployProxy(VrfToken);
+  const vrfToken: Contract = await upgrades.deployProxy(VrfToken, { kind: 'uups' });
   // const vrfToken = await VrfToken.deploy();
   await vrfToken.deployed();
 
